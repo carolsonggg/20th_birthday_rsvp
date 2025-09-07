@@ -1,1 +1,1 @@
-download the zip and open index.html to see detailsss
+download the zip and open index.html to see details and rsvp
