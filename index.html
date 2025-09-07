@@ -50,11 +50,31 @@
               donate to our college fund … 
               <a href="https://venmo.com/u/carolsnog" target="_blank">venmo link</a>
             </p>
+
+            <div class="scrolling">
+              <h2>See who's coming</h2>
+
+              <div id="scrollBox" class="scroll-box" role="region" aria-label="Scrollable text box">
+              <p>Loading...</p>
+            </div>
+            </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+  fetch("https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("scrollBox").innerHTML = data;
+    })
+    .catch(err => {
+      console.error("Error fetching data: ", err);
+      document.getElementById("scrollBox").innerHTML = "<p>Error loading data</p>";
+    });
+</script>
   
   <style>
     body {
@@ -168,6 +188,18 @@
       font-weight: 600;
       color: green;
     }
+
+    .scroll-box {
+      height: 220px;           /* change this to control visible height */
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      overflow: auto;          /* makes the box scroll when content overflows */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      line-height: 1.5;
+      resize: vertical;        /* user can drag to resize vertically (optional) */
+    }
   
     .gift-text {
       font-size: 20px;
@@ -212,4 +244,6 @@
       document.getElementById("submitBtn").disabled = false;
     }
   </script>
+
+
   
