@@ -8,7 +8,7 @@
   
         <!-- Right: Form -->
         <div class="form-content">
-          <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbxG3QKdeiwAgkLRpA_r18mLZfxdntdmBdqlfz1jh23I64j9qdG9fwwhrYfPYkdnSq1V/exec" method="POST">
+          <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec" method="POST">
             
             <!-- Name Fields -->
             <div class="flex formbold--mx-3">
@@ -47,7 +47,7 @@
   
             <!-- Submit -->
             <div>
-              <button id="submitBtn" class="formbold-btn" disabled>submit</button>
+              <button id="submitBtn" class="formbold-btn" disabled>lock in</button>
             </div>
   
             <!-- Success message -->
@@ -57,7 +57,7 @@
             <p class="gift-text">
               don't know what to gift?<br>
               donate to our college fund … 
-              <a href="https://venmo.com/u/carolsnog" target="_blank">@carolsnog</a>
+              <a href="https://venmo.com/u/carolsnog" target="_blank">venmo link</a>
             </p>
           </form>
         </div>
@@ -220,13 +220,5 @@
       document.getElementById("rulesBox").style.display = "block";
       document.getElementById("submitBtn").disabled = false;
     }
-  
-    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      this.reset();
-      document.getElementById("successMsg").style.display = "block";
-      document.getElementById("submitBtn").disabled = true;
-      document.getElementById("rulesBox").style.display = "none";
-    });
   </script>
   
