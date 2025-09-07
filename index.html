@@ -1,175 +1,232 @@
 <div class="formbold-main-wrapper">
-    <!-- Author: FormBold Team -->
-    <!-- Learn More: https://formbold.com -->
-    <div class="formbold-form-wrapper flex">
-        <img src="image.png" width="50%">
-        <form action="https://script.google.com/macros/s/AKfycbwTZyGTtHkHtHgOIDHckJfqlQrbOOv-71BFMpX5VM_NvCEmgHLZiLbiOIpCoK-UXcR_/exec" method="POST">
-            <div class="flex flex-wrap formbold--mx-3">
-            <div class="w-full sm:w-half formbold-px-3">
-                <div class="formbold-mb-5">
-                <label for="fName" class="formbold-form-label"> First Name </label>
-                <input
-                    type="text"
-                    name="f"
-                    id="fName"
-                    placeholder="First Name"
-                    class="formbold-form-input"
-                />
-                </div>
+    <div class="formbold-form-wrapper">
+      <div class="form-layout">
+        <!-- Left: Invitation Image -->
+        <div class="form-image">
+          <img src="image.png" alt="Invitation" />
+        </div>
+  
+        <!-- Right: Form -->
+        <div class="form-content">
+          <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbxG3QKdeiwAgkLRpA_r18mLZfxdntdmBdqlfz1jh23I64j9qdG9fwwhrYfPYkdnSq1V/exec" method="POST">
+            
+            <!-- Name Fields -->
+            <div class="flex formbold--mx-3">
+              <div class="w-half formbold-px-3">
+                <label for="fName" class="formbold-form-label big-label"> first name </label>
+                <input type="text" name="f" id="fName" placeholder="first name" class="formbold-form-input" />
+              </div>
+              <div class="w-half formbold-px-3">
+                <label for="lName" class="formbold-form-label big-label"> last name </label>
+                <input type="text" name="l" id="lName" placeholder="last name" class="formbold-form-input" />
+              </div>
             </div>
-            <div class="w-full sm:w-half formbold-px-3">
-                <div class="formbold-mb-5">
-                <label for="lName" class="formbold-form-label"> Last Name </label>
-                <input
-                    type="text"
-                    name="l"
-                    id="lName"
-                    placeholder="Last Name"
-                    class="formbold-form-input"
-                />
-                </div>
+  
+            <!-- House Rules Button -->
+            <button type="button" class="formbold-btn rules-btn" onclick="showRules()">view house rules</button>
+  
+            <!-- Hidden House Rules -->
+            <div id="rulesBox" class="rules-box" style="display:none;">
+              <ol>
+                <li>no shoes in the house</li>
+                <li>substances in moderation</li>
+                <li>respect the property</li>
+                <li>thank tony, tony, and nolan (tony) cus this is their house</li>
+                <li>leave by 12</li>
+              </ol>
             </div>
+  
+            <!-- RSVP Question -->
+            <div class="rsvp-box">
+              <label class="formbold-form-label medium-label"> come? </label>
+              <div class="flex">
+                <input type="radio" name="yn" value="yes" id="radioYes" class="formbold-radio" />
+                <label for="radioYes" class="formbold-radio-label"> yes </label>
+              </div>
             </div>
-    
-            <div class="formbold-mb-5">
-                <div>
-                    <label for="guest" class="formbold-form-label">
-                         come?
-                    </label>
-                </div>
-                <div>
-                    <div class="flex">
-                        <input
-                        type="radio"
-                        name="yn1"
-                        id="radioButton1"
-                        class="formbold-radio"
-                        />
-                        <label for="radioButton1" class="formbold-radio-label"> Yes </label>
-                    </div>
-                    <!-- <div class="flex">
-                        <input
-                        type="radio"
-                        name="nothing"
-                        id="radioButton2"
-                        class="formbold-radio"
-                        />
-                        <label for="radioButton2" class="formbold-radio-label"> No </label>
-                    </div> -->
-                </div>
-            </div>
-    
+  
+            <!-- Submit -->
             <div>
-            <button class="formbold-btn">Submit</button>
+              <button id="submitBtn" class="formbold-btn" disabled>submit</button>
             </div>
-        </form>
+  
+            <!-- Success message -->
+            <p id="successMsg" class="success-msg" style="display:none;">🎉 you’ve successfully rsvped!</p>
+  
+            <!-- Gift Suggestion -->
+            <p class="gift-text">
+              don't know what to gift?<br>
+              donate to our college fund … 
+              <a href="https://venmo.com/u/carolsnog" target="_blank">@carolsnog</a>
+            </p>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+  
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
     body {
       font-family: "Inter", sans-serif;
+      background: #fafafa;
     }
-    .formbold-mb-5 {
-      margin-bottom: 20px;
-    }
-    .formbold-pt-3 {
-      padding-top: 12px;
-    }
+  
     .formbold-main-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 48px;
+      padding: 80px; /* more breathing room */
     }
   
-    .formbold-form-wrapper {
-      margin: 0 auto;
-      max-width: 550px;
-      width: 100%;
+    .form-layout {
+      display: flex;
       background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 1100px; /* wider container */
+      box-shadow: 0px 6px 14px rgba(0,0,0,0.12);
     }
-    .formbold-form-label {
-      display: block;
-      font-weight: 500;
-      font-size: 16px;
-      color: #07074d;
-      margin-bottom: 12px;
+  
+    .form-image {
+      flex: 1;
+      background: #f4f4f4;
     }
-    .formbold-form-label-2 {
+  
+    .form-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .form-content {
+      flex: 1;
+      padding: 80px; /* more padding */
+      display: flex;
+      flex-direction: column;
+      gap: 100px; /* bigger spacing between sections */
+    }
+  
+    .formbold-form-label.big-label {
+      font-size: 22px;
       font-weight: 600;
-      font-size: 20px;
       margin-bottom: 20px;
+      color: #07074d;
+    }
+  
+    .formbold-form-label.medium-label {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #333;
     }
   
     .formbold-form-input {
       width: 100%;
-      padding: 12px 24px;
-      border-radius: 6px;
+      padding: 18px 24px; /* larger inputs */
+      border-radius: 8px;
       border: 1px solid #e0e0e0;
-      background: white;
-      font-weight: 500;
-      font-size: 16px;
-      color: #6b7280;
-      outline: none;
-      resize: none;
+      font-size: 18px;
     }
-    .formbold-form-input:focus {
-      border-color: #6a64f1;
-      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  
+    .formbold-radio {
+      width: 24px;
+      height: 24px;
+    }
+  
+    .formbold-radio-label {
+      margin-left: 20px;
+      font-size: 18px;
+      color: #070707;
     }
   
     .formbold-btn {
       text-align: center;
-      font-size: 16px;
-      border-radius: 6px;
-      padding: 14px 32px;
+      font-size: 20px;
+      border-radius: 8px;
+      padding: 16px 36px; /* larger button */
       border: none;
-      font-weight: 600;
+      font-weight: 700;
       background-color: #6a64f1;
       color: white;
       cursor: pointer;
+      transition: 0.2s;
     }
-    .formbold-btn:hover {
-      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+  
+    .formbold-btn:hover:enabled {
+      background-color: #5751d8;
+    }
+  
+    .formbold-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  
+    .rules-box {
+      font-size: 20px;
+      color: #444;
+      padding-left: 25px;
+      line-height: 1.6; /* looser line spacing */
+    }
+  
+    .rules-box li {
+      margin-bottom: 20px;
+    }
+  
+    .success-msg {
+      font-size: 22px;
+      font-weight: 600;
+      color: green;
+    }
+  
+    .gift-text {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: 500;
+      color: #333;
+    }
+  
+    .gift-text a {
+      color: #6a64f1;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  
+    .gift-text a:hover {
+      text-decoration: underline;
+    }
+  
+    .flex {
+      display: flex;
+      align-items: center;
+    }
+  
+    .w-half {
+      width: 50%;
     }
   
     .formbold--mx-3 {
-      margin-left: -12px;
-      margin-right: -12px;
+      margin-left: -16px;
+      margin-right: -16px;
     }
+  
     .formbold-px-3 {
-      padding-left: 12px;
-      padding-right: 12px;
-    }
-    .flex {
-      display: flex;
-    }
-    .flex-wrap {
-      flex-wrap: wrap;
-    }
-    .w-full {
-      width: 100%;
-    }
-    .formbold-radio {
-      width: 20px;
-      height: 20px;
-    }
-    .formbold-radio-label {
-      font-weight: 500;
-      font-size: 16px;
-      padding-left: 12px;
-      color: #070707;
-      padding-right: 20px;
-    }
-    @media (min-width: 540px) {
-      .sm\:w-half {
-        width: 50%;
-      }
+      padding-left: 16px;
+      padding-right: 16px;
     }
   </style>
+  
+  <script>
+    function showRules() {
+      document.getElementById("rulesBox").style.display = "block";
+      document.getElementById("submitBtn").disabled = false;
+    }
+  
+    document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      this.reset();
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("submitBtn").disabled = true;
+      document.getElementById("rulesBox").style.display = "none";
+    });
+  </script>
   
