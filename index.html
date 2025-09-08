@@ -1,215 +1,276 @@
-<div class="formbold-main-wrapper">
-    <div class="formbold-form-wrapper">
-      <div class="form-layout">
-        <div class="form-image">
-          <img src="image.png" alt="Invitation" />
-        </div>
-  
-        <div class="form-content">
-          <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec" method="POST">
-            
-            <div class="flex formbold--mx-3">
-              <div class="w-half formbold-px-3">
-                <label for="fName" class="formbold-form-label big-label"> first name </label>
-                <input type="text" name="f" id="fName" placeholder="first name" class="formbold-form-input" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // Call the Apps Script function
+      function fetchSheetData() {
+        google.script.run.withSuccessHandler(displayData).getData();
+      }
+
+      // Display data in the <p> element
+      function displayData(values) {
+        const p = document.getElementById('sheetData');
+        // Convert the 2D array into a string for display
+        p.textContent = values.map(row => row.join(', ')).join('\n');
+      }
+
+      // Automatically fetch data when the page loads
+      window.onload = fetchSheetData;
+    </script>
+  </head>
+  <body>
+    <div class="formbold-main-wrapper">
+      <div class="formbold-form-wrapper">
+        <div class="form-layout">
+          <div class="form-image">
+            <img src="image.png" alt="Invitation" />
+          </div>
+
+          <div class="form-content">
+            <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec" method="POST">
+              
+              <div class="flex formbold--mx-3 form-section">
+                <div class="w-half formbold-px-3">
+                  <label for="fName" class="formbold-form-label big-label"> first name </label>
+                  <input type="text" name="f" id="fName" placeholder="first name" class="formbold-form-input" />
+                </div>
+                <div class="w-half formbold-px-3">
+                  <label for="lName" class="formbold-form-label big-label"> last name </label>
+                  <input type="text" name="l" id="lName" placeholder="last name" class="formbold-form-input" />
+                </div>
               </div>
-              <div class="w-half formbold-px-3">
-                <label for="lName" class="formbold-form-label big-label"> last name </label>
-                <input type="text" name="l" id="lName" placeholder="last name" class="formbold-form-input" />
+
+              <button type="button" class="formbold-btn rules-btn form-section" onclick="showRules()">view house rules</button>
+
+              <div id="rulesBox" class="rules-box form-section" style="display:none;">
+                <ol>
+                  <li>no shoes in the house</li>
+                  <li>substances in moderation</li>
+                  <li>respect the property</li>
+                  <li>thank tony, tony, and nolan (tony) cus this is their house</li>
+                  <li>leave by 12</li>
+                </ol>
               </div>
-            </div>
-  
-            <button type="button" class="formbold-btn rules-btn" onclick="showRules()">view house rules</button>
-  
-            <div id="rulesBox" class="rules-box" style="display:none;">
-              <ol>
-                <li>no shoes in the house</li>
-                <li>substances in moderation</li>
-                <li>respect the property</li>
-                <li>thank tony, tony, and nolan (tony) cus this is their house</li>
-                <li>leave by 12</li>
-              </ol>
-            </div>
-  
-            <div class="rsvp-box">
-              <label class="formbold-form-label medium-label"> come? </label>
-              <div class="flex">
-                <input type="radio" name="yn" value="yes" id="radioYes" class="formbold-radio" />
-                <label for="radioYes" class="formbold-radio-label"> yes </label>
+
+              <div class="rsvp-box form-section">
+                <label class="formbold-form-label medium-label"> come? </label>
+                <div class="flex">
+                  <input type="radio" name="yn" value="yes" id="radioYes" class="formbold-radio" />
+                  <label for="radioYes" class="formbold-radio-label"> yes </label>
+                </div>
               </div>
-            </div>
-  
-            <div>
-              <button id="submitBtn" class="formbold-btn" disabled>lock in</button>
-            </div>
-  
-            <p id="successMsg" class="success-msg" style="display:none;">🎉 you’ve successfully rsvped!</p>
-  
-            <p class="gift-text">
-              don't know what to gift?<br>
-              donate to our college fund … 
-              <a href="https://venmo.com/u/carolsnog" target="_blank">venmo link</a>
-            </p>
-          </form>
+
+              <div class="form-section">
+                <button id="submitBtn" class="formbold-btn" disabled>lock in</button>
+              </div>
+
+              <p id="successMsg" class="success-msg form-section" style="display:none;">🎉 you’ve successfully rsvped!</p>
+
+              <p class="gift-text form-section">
+                don't know what to gift?<br>
+                donate to our college fund … 
+                <a href="https://venmo.com/u/carolsnog" target="_blank">venmo link</a>
+              </p>
+
+              <div>
+                <p>See who's coming...</p>
+                <div class="scroll-box" id="scrollBox" role="region" aria-label="Scrollable text box" id="scrollBox">
+                  Loading..
+                  <!-- <ul>
+                    <? for (var i = 0; i < sheetData.length; i++) { ?>
+                      <li><?= sheetData[i][0] ?> | <?= sheetData[i][1] ?></li>
+                    <? } ?>
+                  </ul> -->
+
+                  <p id="sheetData"></p>
+
+                </div>
+              </div>
+
+              <p class="birthday-note">carol's bday: nov 3 | maggie's bday: nov 24</p>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <style>
-    body {
-      font-family: "Inter", sans-serif;
-      background: #fafafa;
-    }
-  
-    .formbold-main-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px;
-    }
-  
-    .form-layout {
-      display: flex;
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      max-width: 1100px; 
-      box-shadow: 0px 6px 14px rgba(0,0,0,0.12);
-    }
-  
-    .form-image {
-      flex: 1;
-      background: #f4f4f4;
-    }
-  
-    .form-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  
-    .form-content {
-      flex: 1;
-      padding: 80px; 
-      display: flex;
-      flex-direction: column;
-      gap: 100px;
-    }
-  
-    .formbold-form-label.big-label {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #07074d;
-    }
-  
-    .formbold-form-label.medium-label {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: #333;
-    }
-  
-    .formbold-form-input {
-      width: 100%;
-      padding: 18px 24px;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-      font-size: 18px;
-    }
-  
-    .formbold-radio {
-      width: 24px;
-      height: 24px;
-    }
-  
-    .formbold-radio-label {
-      margin-left: 20px;
-      font-size: 18px;
-      color: #070707;
-    }
-  
-    .formbold-btn {
-      text-align: center;
-      font-size: 20px;
-      border-radius: 8px;
-      padding: 16px 36px; 
-      border: none;
-      font-weight: 700;
-      background-color: #6a64f1;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-  
-    .formbold-btn:hover:enabled {
-      background-color: #5751d8;
-    }
-  
-    .formbold-btn:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-  
-    .rules-box {
-      font-size: 20px;
-      color: #444;
-      padding-left: 25px;
-      line-height: 1.6; 
-    }
-  
-    .rules-box li {
-      margin-bottom: 20px;
-    }
-  
-    .success-msg {
-      font-size: 22px;
-      font-weight: 600;
-      color: green;
-    }
-  
-    .gift-text {
-      font-size: 20px;
-      margin-top: 20px;
-      font-weight: 500;
-      color: #333;
-    }
-  
-    .gift-text a {
-      color: #6a64f1;
-      text-decoration: none;
-      font-weight: 700;
-    }
-  
-    .gift-text a:hover {
-      text-decoration: underline;
-    }
-  
-    .flex {
-      display: flex;
-      align-items: center;
-    }
-  
-    .w-half {
-      width: 50%;
-    }
-  
-    .formbold--mx-3 {
-      margin-left: -16px;
-      margin-right: -16px;
-    }
-  
-    .formbold-px-3 {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-  </style>
-  
-  <script>
-    function showRules() {
-      document.getElementById("rulesBox").style.display = "block";
-      document.getElementById("submitBtn").disabled = false;
-    }
-  </script>
-  
+  </body>
+</html>
+
+
+<style>
+  body {
+    font-family: "Inter", sans-serif;
+    background: #fafafa;
+  }
+
+  .formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+  }
+
+  .form-layout {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 1100px; 
+    box-shadow: 0px 6px 14px rgba(0,0,0,0.12);
+  }
+
+  .form-image {
+    flex: 1;
+    background: #f4f4f4;
+  }
+
+  .form-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .form-content {
+    flex: 1;
+    padding: 80px; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-section {
+    margin-bottom: 40px; /* consistent spacing between blocks */
+  }
+
+  .formbold-form-label.big-label {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #07074d;
+  }
+
+  .formbold-form-label.medium-label {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .formbold-form-input {
+    width: 100%;
+    padding: 18px 24px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 18px;
+  }
+
+  .formbold-radio {
+    width: 24px;
+    height: 24px;
+  }
+
+  .formbold-radio-label {
+    margin-left: 20px;
+    font-size: 18px;
+    color: #070707;
+  }
+
+  .formbold-btn {
+    text-align: center;
+    font-size: 20px;
+    border-radius: 8px;
+    padding: 16px 36px; 
+    border: none;
+    font-weight: 700;
+    background-color: #6a64f1;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .formbold-btn:hover:enabled {
+    background-color: #5751d8;
+  }
+
+  .formbold-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .rules-box {
+    font-size: 20px;
+    color: #444;
+    padding-left: 25px;
+    line-height: 1.6; 
+  }
+
+  .rules-box li {
+    margin-bottom: 20px;
+  }
+
+  .success-msg {
+    font-size: 22px;
+    font-weight: 600;
+    color: green;
+  }
+
+  .gift-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .gift-text a {
+    color: #6a64f1;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .gift-text a:hover {
+    text-decoration: underline;
+  }
+
+  .birthday-note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .w-half {
+    width: 50%;
+  }
+
+  .formbold--mx-3 {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .formbold-px-3 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .scroll-box {
+    height: 220px;        
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    overflow: auto;         
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    line-height: 1.5;
+    resize: vertical;     
+  }
+</style>
+
+<script>
+  function showRules() {
+    document.getElementById("rulesBox").style.display = "block";
+    document.getElementById("submitBtn").disabled = false;
+  }
+</script>
