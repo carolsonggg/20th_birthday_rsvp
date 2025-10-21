@@ -1,25 +1,44 @@
-<div class="formbold-main-wrapper">
-  <div class="formbold-form-wrapper">
-    <div class="form-layout">
-      <div class="form-image">
-        <img src="image.png" alt="Invitation" />
-      </div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      // Call the Apps Script function
+      function fetchSheetData() {
+        google.script.run.withSuccessHandler(displayData).getData();
+      }
 
-      <div class="form-content">
-        <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec" method="POST">
-          
-          <div class="flex formbold--mx-3 form-section">
-            <div class="w-half formbold-px-3">
-              <label for="fName" class="formbold-form-label big-label"> first name </label>
-              <input type="text" name="f" id="fName" placeholder="first name" class="formbold-form-input" />
-            </div>
-            <div class="w-half formbold-px-3">
-              <label for="lName" class="formbold-form-label big-label"> last name </label>
-              <input type="text" name="l" id="lName" placeholder="last name" class="formbold-form-input" />
-            </div>
+      // Display data in the <p> element
+      function displayData(values) {
+        const p = document.getElementById('sheetData');
+        // Convert the 2D array into a string for display
+        p.textContent = values.map(row => row.join(', ')).join('\n');
+      }
+
+      // Automatically fetch data when the page loads
+      window.onload = fetchSheetData;
+    </script>
+  </head>
+  <body>
+    <div class="formbold-main-wrapper">
+      <div class="formbold-form-wrapper">
+        <div class="form-layout">
+          <div class="form-image">
+            <img src="image.png" alt="Invitation" />
           </div>
 
-          <button type="button" class="formbold-btn rules-btn form-section" onclick="showRules()">view house rules</button>
+          <div class="form-content">
+            <form id="rsvpForm" action="https://script.google.com/macros/s/AKfycbwCcPZ-QZN0IPNSfe8xIz8ioXYlIk6RwV1094FazkI0Pgm9eGPHp9f9hPQVVpgKqXaW/exec" method="POST">
+              
+              <div class="flex formbold--mx-3 form-section">
+                <div class="w-half formbold-px-3">
+                  <label for="fName" class="formbold-form-label big-label"> first name </label>
+                  <input type="text" name="f" id="fName" placeholder="first name" class="formbold-form-input" />
+                </div>
+                <div class="w-half formbold-px-3">
+                  <label for="lName" class="formbold-form-label big-label"> last name </label>
+                  <input type="text" name="l" id="lName" placeholder="last name" class="formbold-form-input" />
+                </div>
+              </div>
 
           <div id="rulesBox" class="rules-box form-section" style="display:none;">
             <ol>
@@ -32,33 +51,12 @@
               <li>thank tony, tony, and nolan (tony) cus this is their house</li>
             </ol>
           </div>
-
-          <div class="rsvp-box form-section">
-            <label class="formbold-form-label medium-label"> come? </label>
-            <div class="flex">
-              <input type="radio" name="yn" value="yes" id="radioYes" class="formbold-radio" />
-              <label for="radioYes" class="formbold-radio-label"> yes </label>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <button id="submitBtn" class="formbold-btn" disabled>lock in</button>
-          </div>
-
-          <p id="successMsg" class="success-msg form-section" style="display:none;">🎉 you’ve successfully rsvped!</p>
-
-          <p class="gift-text form-section">
-            don't know what to gift?<br>
-            donate to our college fund … 
-            <a href="https://venmo.com/u/carolsnog" target="_blank">venmo link</a>
-          </p>
-
-          <p class="birthday-note">carol's bday: nov 3 | maggie's bday: nov 24</p>
-        </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>
+</html>
+
 
 <style>
   body {
@@ -216,6 +214,18 @@
   .formbold-px-3 {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .scroll-box {
+    height: 220px;        
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    overflow: auto;         
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    line-height: 1.5;
+    resize: vertical;     
   }
 </style>
 
